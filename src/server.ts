@@ -1,5 +1,7 @@
 import express, { Express } from "express";
 
+import { ClientRoutes } from "./routes/clients/clients-routes";
+
 export class App {
   private app: Express;
 
@@ -10,9 +12,8 @@ export class App {
   }
 
   private routes() {
-    this.app.use("/api/deliveries", (request, response) => {
-      response.json({ message: "delivery" });
-    });
+    const clientRoutes = new ClientRoutes();
+    this.app.use("/api/deliveries", clientRoutes.getRouter());
   }
 
   public startServer(port: number | string) {
