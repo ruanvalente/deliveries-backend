@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 
 import { ClientRoutes } from "./routes/clients/clients-routes";
+import { AuthenticateClientRoutes } from "./routes/authenticate-client/authenticate-client-routes";
 
 export class App {
   private app: Express;
@@ -13,6 +14,12 @@ export class App {
 
   private routes() {
     const clientRoutes = new ClientRoutes();
+    const authenticateClientRoutes = new AuthenticateClientRoutes();
+
+    this.app.use(
+      "/api/deliveries/auth/client",
+      authenticateClientRoutes.getRouter()
+    );
     this.app.use("/api/deliveries", clientRoutes.getRouter());
   }
 
