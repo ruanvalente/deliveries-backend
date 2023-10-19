@@ -1,4 +1,9 @@
 import express, { Express } from "express";
+import "express-async-errors";
+
+import { AuthenticateClientRoutes } from "./routes/authenticate-client/authenticate-client-routes";
+import { ClientRoutes } from "./routes/clients/clients-routes";
+import { ExceptionMiddleWare } from "./routes/middlewares/exception-middleware";
 
 export class App {
   private app: Express;
@@ -7,12 +12,18 @@ export class App {
     this.app = express();
     this.app.use(express.json());
     this.routes();
+    this.app.use(ExceptionMiddleWare.exceptionMiddle);
   }
 
   private routes() {
-    this.app.use("/api/deliveries", (request, response) => {
-      response.json({ message: "delivery" });
-    });
+    const clientRoutes = new ClientRoutes();
+    const authenticateClientRoutes = new AuthenticateClientRoutes();
+
+    this.app.use(
+      "/api/deliveries/auth/client",
+      authenticateClientRoutes.getRouter()
+    );
+    this.app.use("/api/deliveries", clientRoutes.getRouter());
   }
 
   public startServer(port: number | string) {
