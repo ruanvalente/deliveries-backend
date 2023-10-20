@@ -7,15 +7,15 @@ interface IAuthenticateClientResquest {
 }
 
 export class AuthenticateClientController {
-  private authtenticateClientUseCase: AuthenticateClientUseCase;
+  private authenticateClientUseCase: AuthenticateClientUseCase;
   constructor() {
-    this.authtenticateClientUseCase = new AuthenticateClientUseCase();
+    this.authenticateClientUseCase = new AuthenticateClientUseCase();
   }
 
   async handle(request: Request, response: Response) {
     const { username, password } = request.body as IAuthenticateClientResquest;
 
-    const clientToken = await this.authtenticateClientUseCase.execute({
+    const clientToken = await this.authenticateClientUseCase.execute({
       username,
       password,
     });

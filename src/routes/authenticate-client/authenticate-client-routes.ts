@@ -1,20 +1,32 @@
 import express from "express";
 
-import { AuthenticateClientController } from "../../modules/account/use-cases/authenticate-client-controller";
+import { AuthenticateClientController } from "../../modules/account/use-cases/client/authenticate-client-controller";
+import { AuthenticateDeliverymanController } from "../../modules/account/use-cases/deliveryman/authenticate-deliveryman-controller";
 
 export class AuthenticateClientRoutes {
   private router = express.Router();
-  private authenticateController: AuthenticateClientController;
+  private authenticateClientController: AuthenticateClientController;
+  private authenticateDeliverymanController: AuthenticateDeliverymanController;
 
   constructor() {
-    this.authenticateController = new AuthenticateClientController();
+    this.authenticateClientController = new AuthenticateClientController();
+    this.authenticateDeliverymanController =
+      new AuthenticateDeliverymanController();
     this.initializeRoutes();
   }
 
   private initializeRoutes() {
     this.router.post(
-      "/",
-      this.authenticateController.handle.bind(this.authenticateController)
+      "/client",
+      this.authenticateClientController.handle.bind(
+        this.authenticateClientController
+      )
+    );
+    this.router.post(
+      "/deliveryman",
+      this.authenticateDeliverymanController.handle.bind(
+        this.authenticateDeliverymanController
+      )
     );
   }
 

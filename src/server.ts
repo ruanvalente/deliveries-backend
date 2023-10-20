@@ -21,10 +21,7 @@ export class App {
     const authenticateClientRoutes = new AuthenticateClientRoutes();
     const deliverymanRoutes = new DeliverymanRoutes();
 
-    this.app.use(
-      "/api/deliveries/auth/client",
-      authenticateClientRoutes.getRouter()
-    );
+    this.app.use("/api/deliveries/auth", authenticateClientRoutes.getRouter());
     this.app.use("/api/deliveries", clientRoutes.getRouter());
     this.app.use("/api/deliveries", deliverymanRoutes.getRouter());
   }
