@@ -1,12 +1,13 @@
 import { hash } from "bcrypt";
 import { prisma } from "../../../../database/prisma-client";
+import { IUseCases } from "../../../../shared/implements/use-cases/use-cases";
 
 interface ICreateClient {
   username: string;
   password: string;
 }
 
-export class CreateClientUseCase {
+export class CreateClientUseCase implements IUseCases {
   async execute({ username, password }: ICreateClient) {
     const clientExists = await prisma.clients.findFirst({
       where: { username: username.toLowerCase() },

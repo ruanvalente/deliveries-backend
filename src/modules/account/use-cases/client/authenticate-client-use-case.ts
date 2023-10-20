@@ -1,20 +1,16 @@
-import { PrismaClient } from "@prisma/client";
 import { compare } from "bcrypt";
 import jsonwebtoken from "jsonwebtoken";
+import { prisma } from "../../../../database/prisma-client";
+import { IUseCases } from "../../../../shared/implements/use-cases/use-cases";
 
 interface IAuthenticateClient {
   username: string;
   password: string;
 }
 
-export class AuthenticateClientUseCase {
-  private prismaClient: PrismaClient;
-
-  constructor() {
-    this.prismaClient = new PrismaClient();
-  }
+export class AuthenticateClientUseCase implements IUseCases {
   async execute({ username, password }: IAuthenticateClient) {
-    const clientExists = await this.prismaClient.clients.findUnique({
+    const clientExists = await prisma.clients.findUnique({
       where: { username },
     });
     if (!clientExists) {
