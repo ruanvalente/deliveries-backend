@@ -8,15 +8,18 @@ interface IAuthenticateDeliverymanRequest {
 }
 
 export class AuthenticateDeliverymanController implements IControllers {
-  private useCase: AuthenticateDeliverymanUseCase;
+  private authenticateDeliverymanUseCase: AuthenticateDeliverymanUseCase;
   constructor() {
-    this.useCase = new AuthenticateDeliverymanUseCase();
+    this.authenticateDeliverymanUseCase = new AuthenticateDeliverymanUseCase();
   }
   async handle(request: Request, response: Response): Promise<any> {
     const { username, password } =
       request.body as IAuthenticateDeliverymanRequest;
 
-    const deliverymanToken = await this.useCase.execute({ username, password });
+    const deliverymanToken = await this.authenticateDeliverymanUseCase.execute({
+      username,
+      password,
+    });
 
     return response.status(200).json({
       token: deliverymanToken,

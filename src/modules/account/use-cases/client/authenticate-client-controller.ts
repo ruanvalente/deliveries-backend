@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { AuthenticateClientUseCase } from "./authenticate-client-use-case";
+import { IControllers } from "../../../../shared/implements/controllers/controllers";
 
 interface IAuthenticateClientResquest {
   username: string;
   password: string;
 }
 
-export class AuthenticateClientController {
+export class AuthenticateClientController implements IControllers {
   private authenticateClientUseCase: AuthenticateClientUseCase;
   constructor() {
     this.authenticateClientUseCase = new AuthenticateClientUseCase();

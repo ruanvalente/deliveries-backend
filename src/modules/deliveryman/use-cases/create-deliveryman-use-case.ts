@@ -1,12 +1,13 @@
 import { hash } from "bcrypt";
 import { prisma } from "../../../database/prisma-client";
+import { IUseCases } from "../../../shared/implements/use-cases/use-cases";
 
 interface ICreateDeliveryman {
   username: string;
   password: string;
 }
 
-export class CreateDeliverymanUseCase {
+export class CreateDeliverymanUseCase implements IUseCases {
   async execute({ username, password }: ICreateDeliveryman) {
     const deliverymanExists = await prisma.deliveryman.findFirst({
       where: { username: username.toLowerCase() },

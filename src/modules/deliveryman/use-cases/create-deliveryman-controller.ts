@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { CreateDeliverymanUseCase } from "./create-deliveryman-use-case";
+import { IControllers } from "../../../shared/implements/controllers/controllers";
 
 interface ICreateDeliverymaRequest {
   username: string;
   password: string;
 }
 
-export class CreateDeliverymanController {
+export class CreateDeliverymanController implements IControllers {
   private createDeliverymanUseCase: CreateDeliverymanUseCase;
 
   constructor() {
