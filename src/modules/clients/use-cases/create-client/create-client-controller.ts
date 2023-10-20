@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { CreateClientUseCase } from "./create-cliente-use-case";
 
-interface ICreateClientResponse {
+interface ICreateClientRequest {
   username: string;
   password: string;
 }
@@ -13,7 +13,7 @@ export class CreateClientController {
     this.createClientUseCase = new CreateClientUseCase();
   }
   async handle(request: Request, response: Response) {
-    const { username, password } = request.body as ICreateClientResponse;
+    const { username, password } = request.body as ICreateClientRequest;
 
     const client = await this.createClientUseCase.execute({
       username,
