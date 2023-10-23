@@ -2,6 +2,7 @@ import express from "express";
 import { IRoutes } from "../../shared/implements/routes";
 
 import { CreateDeliveryController } from "../../modules/deliveries/use-cases/create-deliveries/create-delivery-controller";
+import { EnsureAuthenticateClientMiddleware } from "../../middlewares/ensure-authenticate-client-middleware";
 
 export class DeliveriesRoutes implements IRoutes {
   private router = express.Router();
@@ -15,6 +16,7 @@ export class DeliveriesRoutes implements IRoutes {
   initializeRoutes(): void {
     this.router.post(
       "/delivery",
+      EnsureAuthenticateClientMiddleware.ensureAuthenticateClientMiddleware,
       this.createDeliveryController.handle.bind(this.createDeliveryController)
     );
   }

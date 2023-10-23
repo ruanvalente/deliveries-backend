@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
 export class ExceptionMiddleWare {
-  static exceptionMiddle(
+  static exceptionMiddleware(
     error: Error,
     request: Request,
     response: Response,

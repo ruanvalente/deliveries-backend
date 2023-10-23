@@ -3,7 +3,7 @@ import "express-async-errors";
 
 import { AuthenticateClientRoutes } from "./routes/authenticate-client/authenticate-client-routes";
 import { ClientRoutes } from "./routes/clients/clients-routes";
-import { ExceptionMiddleWare } from "./routes/middlewares/exception-middleware";
+import { ExceptionMiddleWare } from "./middlewares/exception-middleware";
 import { DeliverymanRoutes } from "./routes/deliveryman/deliveryman-routes";
 import { DeliveriesRoutes } from "./routes/deliveries/deliveries-routes";
 
@@ -14,7 +14,7 @@ export class App {
     this.app = express();
     this.app.use(express.json());
     this.routes();
-    this.app.use(ExceptionMiddleWare.exceptionMiddle);
+    this.app.use(ExceptionMiddleWare.exceptionMiddleware);
   }
 
   private routes() {
