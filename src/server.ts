@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import "express-async-errors";
+import "dotenv/config";
 
 import { AuthenticateClientRoutes } from "./routes/authenticate-client/authenticate-client-routes";
 import { ClientRoutes } from "./routes/clients/clients-routes";
