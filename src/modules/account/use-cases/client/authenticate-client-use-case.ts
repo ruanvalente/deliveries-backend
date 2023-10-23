@@ -21,14 +21,12 @@ export class AuthenticateClientUseCase implements IUseCases {
     if (!clientPasswordMatch) {
       throw new Error("password is not correct");
     }
-    const token = jsonwebtoken.sign(
-      { username },
-      "671a0da0ba061c98de801409dbc57d7e",
-      {
-        subject: clientExists.id,
-        expiresIn: "1d",
-      }
-    );
+    const CLIENT_SECRET_TOKEN = process.env.CLIENT_SECRET_TOKEN as string;
+
+    const token = jsonwebtoken.sign({ username }, CLIENT_SECRET_TOKEN, {
+      subject: clientExists.id,
+      expiresIn: "1d",
+    });
 
     return token;
   }

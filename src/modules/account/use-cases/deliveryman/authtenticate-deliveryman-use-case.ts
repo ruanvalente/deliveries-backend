@@ -30,15 +30,12 @@ export class AuthenticateDeliverymanUseCase implements IUseCases {
     if (!deliverymanPasswordMath) {
       throw new Error("Deliveryman password is not correct");
     }
-
-    const token = jsonwebtoken.sign(
-      { username },
-      "671a0da0ba061c98de801409dbc89d7e",
-      {
-        subject: deliverymanExist.id,
-        expiresIn: "1d",
-      }
-    );
+    const DELIVERYMAN_SECRET_TOKEN = process.env
+      .DELIVERYMAN_SECRET_TOKEN as string;
+    const token = jsonwebtoken.sign({ username }, DELIVERYMAN_SECRET_TOKEN, {
+      subject: deliverymanExist.id,
+      expiresIn: "1d",
+    });
 
     return token;
   }
