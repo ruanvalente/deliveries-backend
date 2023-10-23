@@ -5,6 +5,7 @@ import { AuthenticateClientRoutes } from "./routes/authenticate-client/authentic
 import { ClientRoutes } from "./routes/clients/clients-routes";
 import { ExceptionMiddleWare } from "./routes/middlewares/exception-middleware";
 import { DeliverymanRoutes } from "./routes/deliveryman/deliveryman-routes";
+import { DeliveriesRoutes } from "./routes/deliveries/deliveries-routes";
 
 export class App {
   private app: Express;
@@ -20,10 +21,12 @@ export class App {
     const clientRoutes = new ClientRoutes();
     const authenticateClientRoutes = new AuthenticateClientRoutes();
     const deliverymanRoutes = new DeliverymanRoutes();
+    const delivereis = new DeliveriesRoutes();
 
     this.app.use("/api/deliveries/auth", authenticateClientRoutes.getRouter());
     this.app.use("/api/deliveries", clientRoutes.getRouter());
     this.app.use("/api/deliveries", deliverymanRoutes.getRouter());
+    this.app.use("/api/deliveries", delivereis.getRoutes());
   }
 
   public startServer(port: number | string) {
