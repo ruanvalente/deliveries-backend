@@ -10,7 +10,11 @@ interface ICreateDeliveryman {
 export class CreateDeliverymanUseCase implements IUseCases {
   async execute({ username, password }: ICreateDeliveryman) {
     const deliverymanExists = await prisma.deliveryman.findFirst({
-      where: { username: username.toLowerCase() },
+      where: {
+        username: {
+          equals: username,
+        },
+      },
     });
 
     console.log(deliverymanExists);

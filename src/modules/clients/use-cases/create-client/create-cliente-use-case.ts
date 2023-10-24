@@ -10,7 +10,11 @@ interface ICreateClient {
 export class CreateClientUseCase implements IUseCases {
   async execute({ username, password }: ICreateClient) {
     const clientExists = await prisma.clients.findFirst({
-      where: { username: username.toLowerCase() },
+      where: {
+        username: {
+          equals: username,
+        },
+      },
     });
 
     if (clientExists) {
