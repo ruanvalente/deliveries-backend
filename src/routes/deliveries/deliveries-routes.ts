@@ -6,17 +6,20 @@ import { EnsureAuthenticateClientMiddleware } from "../../middlewares/ensure-aut
 import { FindAllAvailableController } from "../../modules/deliveries/use-cases/find-all-available/find-all-available-controller";
 import { EnsureAuthenticateDeliverymanMiddleware } from "../../middlewares/ensure-authenticate-deliveryman-middleware";
 import { UpdateDeliverymanController } from "../../modules/deliveries/use-cases/update-deliveryman/update-deliveryman-controller";
+import { UpdateEndDateController } from "../../modules/deliveries/use-cases/update-end-date/update-end-date-controller";
 
 export class DeliveriesRoutes implements IRoutes {
   private router = express.Router();
   private createDeliveryController: CreateDeliveryController;
   private findAllAvailableController: FindAllAvailableController;
   private updateDeliverymanController: UpdateDeliverymanController;
+  private updateEndDateController: UpdateEndDateController;
 
   constructor() {
     this.createDeliveryController = new CreateDeliveryController();
     this.findAllAvailableController = new FindAllAvailableController();
     this.updateDeliverymanController = new UpdateDeliverymanController();
+    this.updateEndDateController = new UpdateEndDateController();
     this.initializeRoutes();
   }
 
@@ -39,6 +42,11 @@ export class DeliveriesRoutes implements IRoutes {
       this.updateDeliverymanController.handle.bind(
         this.updateDeliverymanController
       )
+    );
+    this.router.put(
+      "/delivery/update-end-date/:id",
+      EnsureAuthenticateDeliverymanMiddleware.ensureAuthenticateDeliverymanMiddleware,
+      this.updateEndDateController.handle.bind(this.updateEndDateController)
     );
   }
   getRoutes(): express.Router {
