@@ -1,6 +1,6 @@
 import { hash } from "bcrypt";
-import { prisma } from "../../../database/prisma-client";
-import { IUseCases } from "../../../shared/implements/use-cases/use-cases";
+import { prisma } from "../../../../database/prisma-client";
+import { IUseCases } from "../../../../shared/implements/use-cases/use-cases";
 
 interface ICreateDeliveryman {
   username: string;
