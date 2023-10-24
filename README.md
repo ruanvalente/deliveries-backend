@@ -163,8 +163,6 @@ $ npm start ou yarn
 # Execute o teste da Aplicação
 $ npm test ou yarn test
 
-# O frontend da aplicação inciará na porta:3000 - acesse:
-
 # http://localhost:3001/api/deliveries
 
 ```
