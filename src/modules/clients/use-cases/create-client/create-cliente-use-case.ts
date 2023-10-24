@@ -1,5 +1,5 @@
 import { hash } from "bcrypt";
-import { prisma } from "../../../../database/prisma-client";
+import { prisma } from "../../../../config/database/prisma/prisma-client";
 import { IUseCases } from "../../../../shared/implements/use-cases/use-cases";
 
 interface ICreateClient {
